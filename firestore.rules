@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Hunters: Profile access restricted to the owner
+    match /hunters/{hunterId} {
+      allow read, write: if request.auth != null && request.auth.uid == hunterId;
+    }
+    
+    // Quests: Read/Write restricted to the creator/assignee
+    match /quests/{questId} {
+      // Allow creation if they match createdById or assignedToId
+      allow create: if request.auth != null && request.resource.data.createdById == request.auth.uid;
+      // Allow reading and modifying if they are the creator or assignee
+      allow read, update, delete: if request.auth != null && (resource.data.createdById == request.auth.uid || resource.data.assignedToId == request.auth.uid);
+    }
+
+    // Daily Quests: Read/Write restricted to the owner
+    match /dailyQuests/{questId} {
+      allow create: if request.auth != null && request.resource.data.hunterId == request.auth.uid;
+      allow read, update, delete: if request.auth != null && resource.data.hunterId == request.auth.uid;
+    }
+
+    // Parties: Anyone who is a member can read and update. Any auth user can create.
+    match /parties/{partyId} {
+      allow create: if request.auth != null;
+      allow read, update: if request.auth != null && request.auth.uid in resource.data.memberIds;
+      // Allow disbanding only if they are the leader (index 0 usually, but simplifying to members for now)
+      allow delete: if request.auth != null && request.auth.uid in resource.data.memberIds;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+.firebase
+.firebaserc
+.env
+*.log
+build_debug.txt
+build_output.txt
+tsconfig.tsbuildinfo

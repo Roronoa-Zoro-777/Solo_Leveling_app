@@ -1,0 +1,25 @@
+
+> solo-level@1.0.0 build
+> next build
+
+  ▲ Next.js 14.2.3
+  - Environments: .env
+
+
+> Build error occurred
+Error: EINVAL: invalid argument, readlink 'C:\Users\GOJO\OneDrive\Desktop\solo_level\.next\server\app\page_client-reference-manifest.js'
+    at async Object.readlink (node:internal/fs/promises:971:10)
+    at async C:\Users\GOJO\OneDrive\Desktop\solo_level\node_modules\next\dist\lib\recursive-delete.js:58:30
+    at async Promise.all (index 4)
+    at async recursiveDelete (C:\Users\GOJO\OneDrive\Desktop\solo_level\node_modules\next\dist\lib\recursive-delete.js:51:5)
+    at async C:\Users\GOJO\OneDrive\Desktop\solo_level\node_modules\next\dist\lib\recursive-delete.js:68:17
+    at async Promise.all (index 0)
+    at async recursiveDelete (C:\Users\GOJO\OneDrive\Desktop\solo_level\node_modules\next\dist\lib\recursive-delete.js:51:5)
+    at async C:\Users\GOJO\OneDrive\Desktop\solo_level\node_modules\next\dist\lib\recursive-delete.js:68:17
+    at async Promise.all (index 7)
+    at async recursiveDelete (C:\Users\GOJO\OneDrive\Desktop\solo_level\node_modules\next\dist\lib\recursive-delete.js:51:5) {
+  errno: -4071,
+  code: 'EINVAL',
+  syscall: 'readlink',
+  path: 'C:\\Users\\GOJO\\OneDrive\\Desktop\\solo_level\\.next\\server\\app\\page_client-reference-manifest.js'
+}
